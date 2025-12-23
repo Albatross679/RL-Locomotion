@@ -1,0 +1,8 @@
+# Dependency folders
+alf/
+dismech-python/
+dismech-rl/
+.venv/
+
+__pycache__/
+.DS_Store
