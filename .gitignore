@@ -57,8 +57,7 @@ build/
 _build/
 
 # DisMech specific
-dismech-rods/build/
-dismech-rods/py_dismech/*.so
+dismech-rods/
 *.cpython-*.so
 
 # Output directories
@@ -103,4 +102,15 @@ htmlcov/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# Setup and verification scripts (keep COMPLETE_SETUP_GUIDE.md)
+check_cmake.sh
+check_git.sh
+GIT_SETUP_INSTRUCTIONS.md
+GIT_SETUP_RECORD.md
+LINUX_SETUP.md
+MISSING_COMPONENTS_REPORT.md
+QUICK_REFERENCE.md
+setup_git_remote.sh
+verify_installation.py
 
