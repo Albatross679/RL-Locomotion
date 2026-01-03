@@ -1,0 +1,10 @@
+[submodule "alf"]
+	path = alf
+	url = https://github.com/HorizonRobotics/alf.git
+[submodule "dismech-python"]
+	path = dismech-python
+	url = https://github.com/Albatross679/dismech-python.git
+[submodule "dismech-rl"]
+	path = dismech-rl
+	url = https://github.com/Albatross679/dismech-rl.git
+

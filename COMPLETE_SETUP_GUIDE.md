@@ -77,6 +77,8 @@ conda install -c conda-forge \
     -y
 ```
 
+**Note**: `boost-cpp` is required for ALF's fast parallel environment extension (`penv`), which is essential for multi-GPU training. See the ALF section and Troubleshooting section for Boost configuration details.
+
 ### Installed C++ Packages
 
 | Package | Version | Source |
@@ -239,6 +241,21 @@ cd .. && pip install -e .
   cd ..
   ```
 - **Location**: `/home/wen.679/RL_locomotion/alf`
+- **Boost Requirement**: ALF requires Boost C++ libraries for its fast parallel environment extension (`penv`), which is essential for multi-GPU training. Boost is installed via `boost-cpp` in the conda environment (see Step 1).
+- **Boost Verification**:
+  ```bash
+  # Verify Boost headers are available
+  ls $CONDA_PREFIX/include/boost/interprocess/ipc/message_queue.hpp
+  
+  # If missing, install:
+  conda install -c conda-forge boost-cpp -y
+  ```
+- **Environment Variables for Boost** (required for compilation):
+  ```bash
+  export CPLUS_INCLUDE_PATH="${CONDA_PREFIX}/include:${CPLUS_INCLUDE_PATH}"
+  export LIBRARY_PATH="${CONDA_PREFIX}/lib:${LIBRARY_PATH}"
+  export LD_LIBRARY_PATH="${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH}"
+  ```
 
 #### dismech-python
 - **Version**: 0.1.0
@@ -591,6 +608,29 @@ mkdir build && cd build
 cmake -DCMAKE_PREFIX_PATH=$CONDA_PREFIX ..
 make -j$(nproc)
 ```
+
+#### 5. Boost Headers Not Found During ALF Extension Compilation
+
+**Problem**: `fatal error: boost/interprocess/ipc/message_queue.hpp: No such file or directory` when running ALF training
+
+**Solution**:
+```bash
+# 1. Verify Boost is installed in conda environment
+conda activate rl-locomotion
+ls $CONDA_PREFIX/include/boost/interprocess/ipc/message_queue.hpp
+
+# 2. If missing, install Boost
+conda install -c conda-forge boost-cpp -y
+
+# 3. Set environment variables before running training
+export CPLUS_INCLUDE_PATH="${CONDA_PREFIX}/include:${CPLUS_INCLUDE_PATH}"
+export LIBRARY_PATH="${CONDA_PREFIX}/lib:${LIBRARY_PATH}"
+export LD_LIBRARY_PATH="${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH}"
+
+# 4. For SLURM jobs, add these exports to your SLURM script
+```
+
+**Note**: This error occurs when ALF tries to compile the `penv` (parallel environment) C++ extension, which is required for fast parallel environment execution in multi-GPU training. The Boost library is already included in the conda installation (Step 1), but environment variables may need to be configured.
 
 ### Verification Commands
 
