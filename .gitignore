@@ -103,7 +103,7 @@ htmlcov/
 .dmypy.json
 dmypy.json
 
-# Setup and verification scripts (keep COMPLETE_SETUP_GUIDE.md)
+# Setup and verification scripts
 check_cmake.sh
 check_git.sh
 GIT_SETUP_INSTRUCTIONS.md
@@ -113,4 +113,16 @@ MISSING_COMPONENTS_REPORT.md
 QUICK_REFERENCE.md
 setup_git_remote.sh
 verify_installation.py
+
+# Guide markdown files
+*GUIDE.md
+*_GUIDE.md
+*SETUP*.md
+*TRAINING*.md
+*LOGGING*.md
+*REMOTE*.md
+SLURM_TRAINING_GUIDE.md
+ERROR_LOGGING_GUIDE.md
+GPU_TRAINING_GUIDE.md
+TENSORBOARD_REMOTE_SETUP.md
 
