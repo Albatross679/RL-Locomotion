@@ -74,10 +74,13 @@ conda install -c conda-forge \
     mkl-devel \
     symengine \
     fcl \
+    ffmpeg \
     -y
 ```
 
-**Note**: `boost-cpp` is required for ALF's fast parallel environment extension (`penv`), which is essential for multi-GPU training. See the ALF section and Troubleshooting section for Boost configuration details.
+**Note**: 
+- `boost-cpp` is required for ALF's fast parallel environment extension (`penv`), which is essential for multi-GPU training. See the ALF section and Troubleshooting section for Boost configuration details.
+- `ffmpeg` is required for video recording during policy evaluation. It enables encoding rendered frames into MP4 video files.
 
 ### Installed C++ Packages
 
@@ -92,6 +95,7 @@ conda install -c conda-forge \
 | mkl-devel | 2025.0.0 | conda-forge |
 | symengine | Latest | conda-forge |
 | fcl | Latest | conda-forge |
+| ffmpeg | 5.1.2 | conda-forge |
 
 ---
 
@@ -148,6 +152,18 @@ conda install -c conda-forge boost-cpp -y
 ```
 
 **Version**: 1.85.0
+
+### FFmpeg
+
+**Installation Method**: Conda
+
+```bash
+conda install -c conda-forge ffmpeg -y
+```
+
+**Version**: 5.1.2
+
+**Purpose**: Video encoding for policy evaluation. Required for recording rendered frames into MP4 video files during policy evaluation with `alf.bin.play --record_file`.
 
 ---
 
@@ -521,6 +537,7 @@ All components should import successfully:
 - ✅ torch, numpy, scipy, matplotlib
 - ✅ gym, pyvista, pyelastica
 - ✅ CMake 3.31.1
+- ✅ ffmpeg 5.1.2
 - ✅ Git remote configured
 - ✅ SSH connection to GitHub working
 
@@ -531,15 +548,16 @@ All components should import successfully:
 ### What Was Installed
 
 1. **Conda Environment**: `rl-locomotion` with Python 3.12.12
-2. **C++ Dependencies**: CMake, Eigen, MKL, SymEngine, FCL, Boost, LLVM
-3. **Python Packages**: 234 total packages including:
+2. **C++ Dependencies**: CMake, Eigen, MKL, SymEngine, FCL, Boost, LLVM, FFmpeg
+3. **Python Packages**: 234+ total packages including:
    - PyTorch 2.6.0+cu124
    - ALF framework
    - dismech-python
    - All RL dependencies
 4. **Repositories**: 4 repositories cloned and configured
 5. **Build Tools**: CMake 3.31.1, GCC 8.5.0, Ninja 1.13.2
-6. **Git**: Repository initialized with SSH connection to GitHub
+6. **Video Tools**: FFmpeg 5.1.2 (for policy evaluation video recording)
+7. **Git**: Repository initialized with SSH connection to GitHub
 
 ### Installation Method
 
@@ -717,6 +735,6 @@ This setup provides a complete RL Locomotion development environment without req
 
 ---
 
-**Last Updated**: December 26, 2024  
+**Last Updated**: January 5, 2026  
 **Maintained By**: Albatross679
 
